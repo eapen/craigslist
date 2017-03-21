@@ -1,7 +1,7 @@
 from craigslist import CraigslistForSale
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Float
 from sqlalchemy.orm import sessionmaker
 from dateutil.parser import parse
 from slackclient import SlackClient
@@ -40,11 +40,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-def scrape_area(area):
-
-    cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=settings.CRAIGSLIST_SECTION,
-                        filters={'max_price': settings.MAX_PRICE, 'min_price': settings.MIN_PRICE,
-                        'query': 'concept 2', 'search_titles': 'T'})
+def scrape_area(cl, area, section):
 
     results = []
     gen = cl.get_results(sort_by='newest', geotagged=True, limit=20)
@@ -97,9 +93,36 @@ def scrape_area(area):
 
 def do_scrape():
     all_results = []
+
+    q = 'concept 2'
     for area in settings.AREAS:
-        print("Searching {}".format(area))
-        all_results += scrape_area(area)
+        for section in settings.SECTIONS:
+            print("Searching for {} in {} in {}".format(q, section, area))
+
+            cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
+                filters={'max_price': settings.MAX_PRICE, 'min_price': settings.MIN_PRICE,
+                'query': q, 'search_titles': 'T'})
+        all_results += scrape_area(cl, area, section)
+
+    q = 'aether backpack'
+    for area in settings.AREAS:
+        for section in settings.SECTIONS:
+            print("Searching for {} in {} in {}".format(q, section, area))
+
+            cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
+                filters={'max_price': 170, 'min_price': 50,
+                'query': q, 'search_titles': 'T'})
+        all_results += scrape_area(cl, area, section)
+
+    q = 'gregory backpack'
+    for area in settings.AREAS:
+        for section in settings.SECTIONS:
+            print("Searching for {} in {} in {}".format(q, section, area))
+
+            cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
+                filters={'max_price': 160, 'min_price': 60,
+                'query': q, 'search_titles': 'T'})
+        all_results += scrape_area(cl, area, section)
 
     print ("{}: Got {} results".format(time.ctime(), len(all_results)))
 

@@ -9,7 +9,7 @@ CRAIGSLIST_SITE = 'sfbay'
 
 AREAS = ["sby", "eby", "sfc", "nby"]
 
-CRAIGSLIST_SECTION = "spo"
+SECTIONS = ["hab", "spo"]
 
 # import private settings
 try:
