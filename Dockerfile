@@ -1,4 +1,6 @@
-FROM ubuntu:trusty
+FROM ubuntu
+
+LABEL maintainer eapen
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -25,13 +27,14 @@ RUN apt-get update && \
               supervisor \
               sqlite
 
+
 RUN mkdir -p /tmp
-COPY craiglister/requirements.txt /tmp/requirements.txt
+COPY craigslister/requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
 COPY deployment/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir -p /opt/wwc
-ADD . /opt/wwc/craigslister
+ADD ./craigslister/ /opt/wwc/craigslister
 
 RUN mkdir -p /opt/wwc/logs
 WORKDIR /opt/wwc/craigslister

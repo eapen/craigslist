@@ -3,7 +3,7 @@ import os
 
 SLEEP_INTERVAL = 20 * 60
 MIN_PRICE = 50
-MAX_PRICE = 900
+MAX_PRICE = 500
 
 CRAIGSLIST_SITE = 'sfbay'
 
@@ -18,7 +18,8 @@ except Exception:
     pass
 
 SLACK_CHANNEL = '#leads'
-SLACK_TOKEN = os.getenv('SLACK_TOKEN', "")
+if not SLACK_TOKEN:
+    SLACK_TOKEN = os.getenv('SLACK_TOKEN', "")
 
 # import external private settings
 try:
