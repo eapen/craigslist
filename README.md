@@ -3,6 +3,8 @@ container.
 
 `cd craigslist`
 `docker build -t craigslister .`
+`docker run -d --name zen_ritchie -i -t craiglister`
+OR
 `docker run -d -e SLACK_TOKEN={SLACK_TOKEN} --name zen_ritchie -i -t craiglister`
 
 View details

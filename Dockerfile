@@ -25,7 +25,9 @@ RUN apt-get update && \
               zip \
               git-core \
               supervisor \
-              sqlite
+              sqlite \
+        && rm -rf /var/lib/apt/lists/*
+
 
 
 RUN mkdir -p /tmp
@@ -37,6 +39,8 @@ RUN mkdir -p /opt/wwc
 ADD ./craigslister/ /opt/wwc/craigslister
 
 RUN mkdir -p /opt/wwc/logs
-WORKDIR /opt/wwc/craigslister
+WORKDIR / opt/wwc/craigslister
+
+EXPOSE 9001
 
 CMD ["/usr/bin/supervisord"]
