@@ -18,7 +18,9 @@ except Exception:
     pass
 
 SLACK_CHANNEL = '#leads'
-if not SLACK_TOKEN:
+try:
+    SLACK_TOKEN
+except NameError:
     SLACK_TOKEN = os.getenv('SLACK_TOKEN', "")
 
 # import external private settings
