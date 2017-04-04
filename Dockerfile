@@ -1,40 +1,20 @@
-FROM ubuntu
+FROM python:3.5.2-alpine
 
 LABEL maintainer eapen
 
-RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get update && \
-    apt-get -y install \
-              python3 \
-              python3-pip \
-              make \
-              build-essential \
-              libssl-dev \
-              zlib1g-dev \
-              libbz2-dev \
-              libreadline-dev \
-              libsqlite3-dev \
-              wget \
-              curl \
-              llvm \
-              libncurses5-dev \
-              zip \
-              git-core \
-              supervisor \
-              sqlite \
-        && rm -rf /var/lib/apt/lists/*
-
-
+RUN apk add --update \
+            supervisor \
+            sqlite
 
 RUN mkdir -p /tmp
 COPY craigslister/requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
-COPY deployment/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY deployment/supervisord.conf /etc/supervisord.conf
 RUN mkdir -p /opt/wwc
 ADD ./craigslister/ /opt/wwc/craigslister
 
