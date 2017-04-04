@@ -8,7 +8,9 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apk add --update \
             supervisor \
-            sqlite
+            sqlite \
+            && rm -rf /var/cache/apk/*
+
 
 RUN mkdir -p /tmp
 COPY craigslister/requirements.txt /tmp/requirements.txt
