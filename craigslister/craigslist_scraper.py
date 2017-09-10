@@ -97,6 +97,7 @@ def do_scrape():
     q = 'concept 2'
     for area in settings.AREAS:
         for section in settings.SECTIONS:
+            time.sleep(2)
             print("Searching for {} in {} in {}".format(q, section, area))
 
             cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
@@ -107,6 +108,7 @@ def do_scrape():
     q = 'aether backpack'
     for area in settings.AREAS:
         for section in settings.SECTIONS:
+            time.sleep(2)
             print("Searching for {} in {} in {}".format(q, section, area))
 
             cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
@@ -117,6 +119,7 @@ def do_scrape():
     q = 'gregory backpack'
     for area in settings.AREAS:
         for section in settings.SECTIONS:
+            time.sleep(2)
             print("Searching for {} in {} in {}".format(q, section, area))
 
             cl = CraigslistForSale(site=settings.CRAIGSLIST_SITE, area=area, category=section,
