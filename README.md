@@ -5,11 +5,11 @@ container.
 
 `docker build -t eapen/craigslister:latest .`
 
-`docker run -d --restart unless-stopped --name zen_ritchie -p IPADDRESS:9001:9001 -t craiglister`
+`docker run -d --restart unless-stopped --name craigslister -p IPADDRESS:8880:9001 -t eapen/craiglister`
 
 OR
 
-`docker run -d --restart unless-stopped -e SLACK_TOKEN={SLACK_TOKEN} --name zen_ritchie -p 9001 -t craiglister`
+`docker run -d --restart unless-stopped -e SLACK_TOKEN={SLACK_TOKEN} --name craigslister -p 0.0.0.0:8880:9001 -t eapen/craiglister`
 
 
 View details
