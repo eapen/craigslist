@@ -13,6 +13,6 @@ OR
 
 
 View details
-`docker exec -it zen_ritchie /bin/bash`
+`docker exec -it craigslister /bin/bash`
 
 `tail -f -n 100 /opt/wwc/logs/craigslister.log`
